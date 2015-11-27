@@ -1,0 +1,430 @@
+data_2 <- read.csv("~/Google Drive/not_to_share/my_backup/myDocuments/postdoc/MERP_postdoc/benthos_data/irishseadata/data_2.csv", header = F)
+data_2[1:10,1:10]
+data_2 <- read.csv("~/Google Drive/not_to_share/my_backup/myDocuments/postdoc/MERP_postdoc/benthos_data/irishseadata/data_2.csv", header = F)
+data_2[1:10,1:10]
+data2 <- read.csv("~/Google Drive/not_to_share/my_backup/myDocuments/postdoc/MERP_postdoc/benthos_data/irishseadata/data_2.csv", header = F)#
+#
+newdata2 <- data.frame(t(data2[, c(4:ncol(data2))]))#
+names(newdata2) <- as.character(data2[, 3])#
+id <- as.character(data2[, 2])
+sapply(c(1:ncol(newdata2)),function(i)class(newdata2[,i]))
+newdata2[1:5,1:20]
+newdata2[1:5,1:25]
+for (i in 19:ncol(newdata)) newdata[, i] <- as.character(newdata[, i])#
+colonial <- which(sapply(c(19:ncol(newdata)), function(i) length(which(newdata[, i] == "P"))) > 0)#
+noncolonial <- which(sapply(c(19:ncol(newdata)), function(i) length(which(newdata[, i] != "P" & newdata[, #
+	i] != "-"))) > 0)#
+# so the intersection of that is not empty, which means there are mixture of Ps and actual numbers. definitely need to ask about the meaning of the Ps.#
+#
+for (i in 19:ncol(newdata)) {#
+	inter <- newdata[, i]#
+	inter1 <- rep(0, nrow(newdata))#
+	inter1[which(inter == "-")] <- NA#
+	inter1[which(inter == "P")] <- 1#
+	inter1[which(inter != "P" & inter != "-")] <- as.numeric(inter[which(inter != "P" & inter != "-")])#
+	newdata[, i] <- inter1#
+	print(i)#
+}
+ab <- sapply(c(19:ncol(newdata)), function(i) sum(newdata[, i], na.rm = T))
+ab
+for (i in 19:ncol(newdata2)) newdata2[, i] <- as.character(newdata2[, i])#
+colonial <- which(sapply(c(19:ncol(newdata2)), function(i) length(which(newdata2[, i] == "P"))) > 0)#
+noncolonial <- which(sapply(c(19:ncol(newdata2)), function(i) length(which(newdata2[, i] != "P" & newdata[, #
+	i] != "-"))) > 0)
+for (i in 19:ncol(newdata2)) {#
+	inter <- newdata2[, i]#
+	inter1 <- rep(0, nrow(newdata2))#
+	inter1[which(inter == "-")] <- NA#
+	inter1[which(inter == "P")] <- 1#
+	inter1[which(inter != "P" & inter != "-")] <- as.numeric(inter[which(inter != "P" & inter != "-")])#
+	newdata2[, i] <- inter1#
+	print(i)#
+}
+ab <- sapply(c(19:ncol(newdata2)), function(i) sum(newdata2[, i], na.rm = T))
+ab
+warnings()
+levels(newdata2$SurveyCode) # 19 different surveys, which is the majority of the ones I had identified
+levels(factor(newdata2$SurveyCode)) # 19 different surveys, which is the majority of the ones I had identified
+length(levels(factor(newdata2$SurveyCode)))
+length(levels(factor(newdata$SurveyCode)))
+(levels(factor(newdata$SurveyCode)))
+names(newdata)
+names(newdata2)
+length(names(newdata2))
+length(names(newdata))
+length(names(newdata),names(newdata2))
+length(intersect(names(newdata),names(newdata2)))
+long <- as.numeric(as.character(newdata2$Longitude))#
+lat <- as.numeric(as.character(newdata2$Latitude))#
+mydat <- data.frame(long = long, lat = lat)#
+mymap <- get_map(location = c(-5, 53.5), "satellite", zoom = 6, scale = "auto", col = "bw")#
+p <- ggmap(mymap) + geom_point(data = mydat, aes(x = long, y = lat))#
+quartz();p
+long <- as.numeric(as.character(newdata2$Longitude))#
+lat <- as.numeric(as.character(newdata2$Latitude))#
+mydat <- data.frame(long = long, lat = lat)#
+mymap <- get_map(location = c(-5, 53.5), "satellite", zoom = 5, scale = "auto", col = "bw")#
+p <- ggmap(mymap) + geom_point(data = mydat, aes(x = long, y = lat))#
+quartz();p
+idx <- (which(ab > 1) + 18)#
+sub <- newdata2[, c(1:18, idx)]#
+meanr <- function(x) mean(x, na.rm = T)#
+sapply(c(19:ncol(sub)), function(i) tapply(sub[, i], factor(sub$SurveyCode), meanr))
+xx <- newdata2[, c(1:18)] # data.frame(newdata$SurveyCode,newdata$Longitude,newdata$Latitude)#
+xxx <- xx[which(as.character(xx$Latitude) == "<null>"), ]
+xxx <- xxx[, c("LocationName", "SampleCode", "DateTaken", "AreaName", "StationCode", "SurveyCode", "Title", #
+	"StartDate", "SourceName")]
+dim(xxx)
+head(xxx)
+length(levels(factor(xxx$SurveyCode)))
+levels(factor(newdata2$SurveyCode))
+length(levels(factor(newdata2$SurveyCode)))
+length(levels(factor(newdata$SurveyCode)))
+(levels(factor(newdata$SurveyCode)))
+length(levels(factor(newdata$SurveyCode)))
+length(levels(factor(newdata2$SurveyCode)))
+(levels(factor(newdata2$SurveyCode)))
+length(levels(factor(newdata2$SurveyCode)))
+length(levels(factor(newdata$SurveyCode)))
+length(levels(factor(c(newdata$SurveyCode,newdata2$SurveyCode))))
+length(c(levels(factor(newdata$SurveyCode),levels(factor(newdata2$SurveyCode))))
+length(c(levels(factor(newdata$SurveyCode)),levels(factor(newdata2$SurveyCode))))
+(c(levels(factor(newdata$SurveyCode)),levels(factor(newdata2$SurveyCode))))
+factor((c(levels(factor(newdata$SurveyCode)),levels(factor(newdata2$SurveyCode)))))
+levels(factor((c(levels(factor(newdata$SurveyCode)),levels(factor(newdata2$SurveyCode))))))
+xxx
+head(xxx)
+levels(xxx$SurveyCode)
+levels(factor(xxx$SurveyCode))
+getwd()
+data2 <- read.csv("~/Google Drive/not_to_share/my_backup/myDocuments/postdoc/MERP_postdoc/benthos_data/irishseadata/data_2.csv", header = F)#
+#
+newdata2 <- data.frame(t(data2[, c(4:ncol(data2))]))#
+names(newdata2) <- as.character(data2[, 3])#
+id <- as.character(data2[, 2])#
+#
+sapply(c(1:ncol(newdata2)),function(i)class(newdata2[,i]))#
+# from column 19 all are factors. convert into characters to replace all the "P" and all the "-" by 1s and NAs respectively#
+for (i in 19:ncol(newdata2)) newdata2[, i] <- as.character(newdata2[, i])#
+colonial <- which(sapply(c(19:ncol(newdata2)), function(i) length(which(newdata2[, i] == "P"))) > 0)#
+noncolonial <- which(sapply(c(19:ncol(newdata2)), function(i) length(which(newdata2[, i] != "P" & newdata[, #
+	i] != "-"))) > 0)#
+# so the intersection of that is not empty, which means there are mixture of Ps and actual numbers. definitely need to ask about the meaning of the Ps.#
+#
+for (i in 19:ncol(newdata2)) {#
+	inter <- newdata2[, i]#
+	inter1 <- rep(0, nrow(newdata2))#
+	inter1[which(inter == "-")] <- NA#
+	inter1[which(inter == "P")] <- 1#
+	inter1[which(inter != "P" & inter != "-")] <- as.numeric(inter[which(inter != "P" & inter != "-")])#
+	newdata2[, i] <- inter1#
+	print(i)#
+}#
+ab <- sapply(c(19:ncol(newdata2)), function(i) sum(newdata2[, i], na.rm = T))#
+levels(factor(newdata2$SurveyCode)) # 20 different surveys
+long <- as.numeric(as.character(newdata2$Longitude))#
+lat <- as.numeric(as.character(newdata2$Latitude))
+idx <- (which(ab > 1) + 18)#
+sub <- newdata2[, c(1:18, idx)]#
+meanr <- function(x) mean(x, na.rm = T)#
+sapply(c(19:ncol(sub)), function(i) tapply(sub[, i], factor(sub$SurveyCode), meanr))
+xx <- newdata2[, c(1:18)] # data.frame(newdata$SurveyCode,newdata$Longitude,newdata$Latitude)#
+xxx <- xx[which(as.character(xx$Latitude) == "<null>"), ]#
+xxx <- xxx[, c("LocationName", "SampleCode", "DateTaken", "AreaName", "StationCode", "SurveyCode", "Title", #
+	"StartDate", "SourceName")]#
+# 14 surveys with missing coordinates, out of 20. that is a lot indeed. will need to get in touch with Jacky about that#
+# write.csv(xxx, "~/Google Drive/not_to_share/my_backup/myDocuments/postdoc/MERP_postdoc/benthos_data/irishseadata/coordinates_for_survey_2.csv", row.names = F)#
+write.csv(xxx, "~/Desktop/coordinates_for_survey_2.csv", row.names = F)
+install.packages("TwitteR")
+install.packages("twitteR")
+?agrep
+install.packages("twitteR",type="source")
+library(twitteR)
+mykey <- "aFlsZOkfrde8IFbGI2CkfsuO4"#
+mysecret <- "YeTX7dtruxRePSzbZ74VAxj5lMvMnW0a1EnGgTCHDA7vXcUE9h"#
+getTwitterOAuth(comsumer_key = mykey, consumer_secret = mysecret)
+?getTwitterOAuth
+getTwitterOAuth
+mykey <- aFlsZOkfrde8IFbGI2CkfsuO4#
+mysecret <- YeTX7dtruxRePSzbZ74VAxj5lMvMnW0a1EnGgTCHDA7vXcUE9h#
+getTwitterOAuth(comsumer_key = mykey, consumer_secret = mysecret)
+getTwitterOAuth(mykey, mysecret)
+?setup_twitter_oauth
+setup_twitter_oauth(consumer_key = mykey, consumer_secret = my_secret, access_token=NULL, access_secret=NULL)
+mysecret
+mysecret <- YeTX7dtruxRePSzbZ74VAxj5lMvMnW0a1EnGgTCHDA7vXcUE9h
+mysecret
+mykey <- aFlsZOkfrde8IFbGI2CkfsuO4
+mykey
+setup_twitter_oauth(consumer_key = mykey, consumer_secret = mysecret, access_token=NULL, access_secret=NULL)
+install.packages("base64enc")
+library(base64enc)
+mykey <- "aFlsZOkfrde8IFbGI2CkfsuO4"#
+mysecret <- "YeTX7dtruxRePSzbZ74VAxj5lMvMnW0a1EnGgTCHDA7vXcUE9h"#
+# getTwitterOAuth(mykey, mysecret)#
+setup_twitter_oauth(consumer_key = mykey, consumer_secret = mysecret, access_token=NULL, access_secret=NULL)
+setup_twitter_oauth(consumer_key = mykey, consumer_secret = mysecret)
+getTwitterOAuth(mykey, mysecret)
+install.packages("httr")
+library(httr)
+install.packages("httr",type="source")
+library(httr)
+setup_twitter_oauth(consumer_key = mykey, consumer_secret = mysecret)
+mykey <- "aFlsZOkfrde8IFbGI2CkfsuO4"#
+mysecret <- "YeTX7dtruxRePSzbZ74VAxj5lMvMnW0a1EnGgTCHDA7vXcUE9h"#
+# getTwitterOAuth(mykey, mysecret)#
+setup_twitter_oauth(consumer_key = mykey, consumer_secret = mysecret)
+oauth_endpoints("twitter")
+setup_twitter_oauth(consumer_key = mykey, consumer_secret = mysecret)
+?setup_twitter_oauth
+myapp <- oauth_app("twitter",#
+#
+  key = mykey,#
+#
+  secret = mysecret#
+#
+)
+oauth1.0_token(oauth_endpoints("twitter"), myapp)
+?oauth_app
+library(httr)
+install.packages("httr")# ,type="source")
+library(httr)
+oauth_endpoints("twitter")
+mykey <- "aFlsZOkfrde8IFbGI2CkfsuO4"#
+mysecret <- "YeTX7dtruxRePSzbZ74VAxj5lMvMnW0a1EnGgTCHDA7vXcUE9h"#
+myapp <- oauth_app("twitter", key = mykey, secret = mysecret )
+myapp
+twitter_token <- oauth1.0_token(oauthendpoints("twitter"),myapp)
+twitter_token <- oauth1.0_token(oauth_endpoints("twitter"),myapp)
+rm(list=ls())
+install.packages("twitteR")#
+install.packages("base64enc")#
+install.packages("httr")# ,type="source")
+library(twitteR)#
+library(base64enc)#
+library(httr)
+mykey <- "aFlsZOkfrde8IFbGI2CkfsuO4"#
+mysecret <- "YeTX7dtruxRePSzbZ74VAxj5lMvMnW0a1EnGgTCHDA7vXcUE9h"#
+myapp <- oauth_app("twitter", key = mykey, secret = mysecret )
+twitter_token <- oauth1.0_token(oauth_endpoints("twitter"),myapp)
+myapp
+class(myapp)
+attr(myapp)
+attributes(myapp)
+myapp$names
+myapp@names
+names(myapp)
+myapp$appname
+myapp$key
+?getTwitterOAuth
+oauth_endpoints("twitter")
+packages()
+installed.packages()
+library('ROAuth')
+install.packages("ROAuth")
+library('ROAuth')
+mykey <- "aFlsZOkfrde8IFbGI2CkfsuO4"#
+mysecret <- "YeTX7dtruxRePSzbZ74VAxj5lMvMnW0a1EnGgTCHDA7vXcUE9h"#
+myapp <- oauth_app("twitter", key = mykey, secret = mysecret )
+twitter_token <- oauth1.0_token(oauth_endpoints("twitter"),myapp)
+library(ROAuth)
+twitter_token <- oauth1.0_token(oauth_endpoints("twitter"),myapp)
+getTwitterOAuth(consumerKey, consumerSecret)
+setup_twitter_oauth(consumer_key = mykey, consumer_secret = mysecret, access_token="1736928450-tP28wqbWVuDshDlIWdAgK2YjnhCjXNPmgQMSOv6", access_secret="kBlSEVBTMzZV6GfIAvjghEG4XHSdfIkURdoxhfdKshK91")
+oauth1.0_token(oauth_endpoints("twitter"),myapp)
+rm(list=ls())
+library(twitteR)#
+library(base64enc)#
+library(httr)#
+#
+# log in into R using the consumer key and secret that was provided when I created my application FlagR#
+mykey <- "aFlsZOkfrde8IFbGI2CkfsuO4"#
+mysecret <- "YeTX7dtruxRePSzbZ74VAxj5lMvMnW0a1EnGgTCHDA7vXcUE9h"#
+# myapp <- oauth_app("twitter", key = mykey, secret = mysecret )#
+#
+# twitter_token <- oauth1.0_token(oauth_endpoints("twitter"),myapp)#
+#
+mytoken <- "1736928450-tP28wqbWVuDshDlIWdAgK2YjnhCjXNPmgQMSOv6"#
+mysaccess <- "kBlSEVBTMzZV6GfIAvjghEG4XHSdfIkURdoxhfdKshK91"#
+# getTwitterOAuth(mykey, mysecret)#
+setup_twitter_oauth(consumer_key = mykey, consumer_secret = mysecret, access_token= mytoken, access_secret= mysaccess)
+?searchTwitter
+library(twitteR)#
+library(base64enc)#
+library(httr)
+mykey <- "aFlsZOkfrde8IFbGI2CkfsuO4"#
+mysecret <- "YeTX7dtruxRePSzbZ74VAxj5lMvMnW0a1EnGgTCHDA7vXcUE9h"#
+# myapp <- oauth_app("twitter", key = mykey, secret = mysecret )#
+#
+# twitter_token <- oauth1.0_token(oauth_endpoints("twitter"),myapp)#
+#
+mytoken <- "1736928450-tP28wqbWVuDshDlIWdAgK2YjnhCjXNPmgQMSOv6"#
+mysaccess <- "kBlSEVBTMzZV6GfIAvjghEG4XHSdfIkURdoxhfdKshK91"#
+# getTwitterOAuth(mykey, mysecret)#
+setup_twitter_oauth(consumer_key = mykey, consumer_secret = mysecret, access_token= mytoken, access_secret= mysaccess)
+?searchTwitter
+res <- searchTwitter("@RemiVergnon",n=100)
+res
+res <- searchTwitter("@ScienceinPolicy",n=100)
+res
+?retweets
+retweets(id=645943286750953472)
+retweets(id="645943286750953472")
+retweeters(id="645943286750953472")
+normalizePath("~/")
+?tweet
+tweet("Really enjoyed @TomAugust85 's talk for @Sheffield_R_ and today at Sheffield Uni on technology and citizen science")
+?oauth1.0_token
+oauth1.0_token(oauth_endpoint("twitter"),myapp)
+mykey <- "aFlsZOkfrde8IFbGI2CkfsuO4"#
+mysecret <- "YeTX7dtruxRePSzbZ74VAxj5lMvMnW0a1EnGgTCHDA7vXcUE9h"
+myapp <- oauth_app("twitter", key = mykey, secret = mysecret )
+twitter_token <- oauth1.0_token(oauth_endpoint("twitter"),myapp)
+?oauth_endpoint
+twitter_token <- oauth2.0_token(oauth_endpoint("twitter"),myapp)
+rm(list=ls())#
+# install.packages("twitteR") note that there is a source version that is more recent#
+# install.packages("twitteR")#
+# install.packages("base64enc")#
+# install.packages("httr")# ,type="source")#
+library(twitteR)#
+library(base64enc)#
+library(httr)#
+#
+# log in into R using the consumer key and secret that was provided when I created my application FlagR#
+source("/Users/Remi/Documents/twitter/mytwitterfile.R")# contains the info needed
+setup_twitter_oauth(consumer_key = mykey, consumer_secret = mysecret, access_token= mytoken, access_secret= mysaccess)
+res <- searchTwitter("@RemiVergnon",n=100)
+res
+?searchTwitter
+rm(list=ls())
+rm(list=ls())#
+# install.packages("twitteR") note that there is a source version that is more recent#
+# install.packages("twitteR")#
+# install.packages("base64enc")#
+# install.packages("httr")# ,type="source")#
+library(twitteR)#
+library(base64enc)#
+library(httr)#
+#
+# log in into R using the consumer key and secret that was provided when I created my application FlagR#
+source("/Users/Remi/Documents/twitter/mytwitterfile.R")# contains the info needed#
+#
+# those two lines should work, I think the oauth_endpoints is not correct though, it needs arguments that are missing here#
+# myapp <- oauth_app("twitter", key = mykey, secret = mysecret )#
+# twitter_token <- oauth1.0_token(oauth_endpoints("twitter"),myapp)#
+#
+# getTwitterOAuth(mykey, mysecret)#
+setup_twitter_oauth(consumer_key = mykey, consumer_secret = mysecret, access_token= mytoken, access_secret= mysaccess)
+tweet("Technical improvement of the day: twitting from R using twitteR. Now to find a use for it...")
+4009/30
+3380+1123+240+40.5
+3380+1123+240
+3380+1123
+4503-3380
+125*4+40*5
+17.75-14.95
+sip
+sip <- read.csv("~/Google Drive/not_to_share/my_backup/myDocuments/SiP_finances/summary.csv")
+dim(sip)
+sip
+tapply(sip$cost,sip$type,sum)
+levels(sip$type)
+sip <- read.csv("~/Google Drive/not_to_share/my_backup/myDocuments/SiP_finances/summary.csv")
+levels(sip$type)
+tapply(sip$cost,sip$type,sum)
+sip <- read.csv("~/Google Drive/not_to_share/my_backup/myDocuments/SiP_finances/summary.csv")
+tapply(sip$cost,sip$type,sum)
+sip$cost[sip$type=="speaker"]
+tapply(sip$cost[sip$type=="speaker"],mean)
+tapply(as.numeric(as.character(sip$cost[sip$type=="speaker"])),mean)
+as.numeric(as.character(sip$cost[sip$type=="speaker"]))
+mean(as.numeric(as.character(sip$cost[sip$type=="speaker"])))
+mean(as.numeric(as.character(sip$cost[sip$type=="speaker"])))
+mean(as.numeric(as.character(sip$cost[sip$type=="catering"])))
+(as.numeric(as.character(sip$cost[sip$type=="catering"])))
+mean(as.numeric(as.character(sip$cost[sip$type=="workshop"])))
+mean(as.numeric(as.character(sip$cost[sip$type=="special"])))
+mean(as.numeric(as.character(sip$cost[sip$type=="equipment"])))
+(as.numeric(as.character(sip$cost[sip$type=="workshop"])))
+library(twitteR)#
+library(base64enc)#
+library(httr)#
+#
+# log in into R using the consumer key and secret that was provided when I created my application FlagR#
+source("/Users/Remi/Documents/twitter/mytwitterfile.R")# contains the info needed#
+#
+# those two lines should work, I think the oauth_endpoints is not correct though, it needs arguments that are missing here#
+# myapp <- oauth_app("twitter", key = mykey, secret = mysecret )#
+# twitter_token <- oauth1.0_token(oauth_endpoints("twitter"),myapp)#
+#
+# getTwitterOAuth(mykey, mysecret)#
+setup_twitter_oauth(consumer_key = mykey, consumer_secret = mysecret, access_token= mytoken, access_secret= mysaccess)
+res <- searchTwitter("@ScienceinPolicy",n=1000)
+res
+retweets(id="645943286750953472")
+getUser("@ScienceinPolicy")
+lookupUser("@ScienceinPolicy")
+lookupUsers("@ScienceinPolicy")
+lookupUsers("ScienceinPolicy")
+timelines(user="ScienceinPolicy")
+userTimeline(user="ScienceinPolicy")
+userTimeline(user="ScienceinPolicy",n=200)
+mean(as.numeric(as.character(sip$cost[sip$type=="speaker"])))# speakers' expenses i.e. acommodation and travel#
+mean(as.numeric(as.character(sip$cost[sip$type=="catering"])))#
+mean(as.numeric(as.character(sip$cost[sip$type=="workshop"])))#
+mean(as.numeric(as.character(sip$cost[sip$type=="special"])))#
+mean(as.numeric(as.character(sip$cost[sip$type=="equipment"])))
+tapply(sip$cost,sip$type,sum)
+sum(tapply(sip$cost,sip$type,sum))
+7645+1000+6400
+list.packages <- c("devtools","roxygen2","testthat","knitr")#
+sapply(c(1:length(list.packages)),function(i){#
+	# install.packages(list.packages[i],repos="http://star-www.st-andrews.ac.uk/cran/")#
+	library(list.packages[i],character.only=T)#
+})
+has_devel()
+setwd("/Users/Remi/Google Drive/not_to_share/my_backup/myDocuments/github/rfoodwebs/rfoodwebs_R_package")
+setwd("Rfoodwebs")
+devtools::use_package("vegan")
+devtools::use_package("rmarkdown", "Suggests")# in documentation: package under "Suggests". see what to add in functions if needs that particular package
+install.packages("rmarkdown")
+devtools::use_package("rmarkdown", "Suggests")# in documentation: package under "Suggests". see what to add in functions if needs that particular package
+getwd()
+devtools::document()# this works as long as we are in the right folder for the R package, no need to "point" at the R file. the first sentence is the title of the help file, so keep that in mind
+?display_random# it works!! note that you can add links to other existing functions using the see also command, or some code that is not run. refer to the hadley advance R site for more details, for now we have enough!
+?mean.r# it works!! note that you can add links to other existing functions using the see also command, or some code that is not run. refer to the hadley advance R site for more details, for now we have enough!
+devtools::use_vignette("my_vignette")
+knit("vignettes/my_vignette.Rmd")
+library(rmarkdown)
+knit("vignettes/my_vignette.Rmd")
+knit2html("vignettes/my_vignette.Rmd")
+?use_data
+?sample
+species_id <- replicate(paste(sample(letters,1),sample(letters,1)),20)
+letters
+sample(letters,1)
+paste(sample(letters,1),sample(letters,1),sep="_")
+replicate(paste(sample(letters,1),sample(letters,1),sep="_"),20)
+?replicate
+species_id <- replicate(FUN = paste(sample(letters,1),sample(letters,1),sep="_"),20)
+myfun <- function() paste(sample(letters,1),sample(letters,1),sep="_")
+species_id <- replicate(myfun, 20)
+myfun()
+myfun()
+myfun()
+myfun()
+?replicate
+replicate(n=10,myfun)
+replicate(n=10,myfun())
+species_id <- replicate(n=20, myfun())
+?letters
+myfun_prey <- function() paste(sample(letters,1),sample(letters,1),sep="_")#
+myfun_pred <- function() paste(sample(LETTERS,1),sample(LETTERS,1),sep="_")#
+prey_id <- replicate(n=20, myfun_prey())#
+pred_id <- replicate(n=20, myfun_pred())
+mydata <- data.frame(prey = prey_id, pred = pred_id)
+devtools::use_data(mydata, Rfoodwebs)
+load("/Users/Remi/Google Drive/not_to_share/my_backup/myDocuments/github/rfoodwebs/rfoodwebs_R_package/Rfoodwebs/data/mydata.rda")
+mydata
+?pryr

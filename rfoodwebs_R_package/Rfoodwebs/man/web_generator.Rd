@@ -2,7 +2,7 @@
 % Please edit documentation in R/web_generator.R
 \name{web_generator}
 \alias{web_generator}
-\title{calculates the mean of a vector while excluding all NAs from it (roxygen comment)}
+\title{creates a food web from predator/prey relationships}
 \usage{
 web_generator(spe_list, f_web)
 }
@@ -12,6 +12,6 @@ web_generator(spe_list, f_web)
 \item{f_web}{is a data frame containing predator/prey relationships}
 }
 \description{
-calculates the mean of a vector while excluding all NAs from it (roxygen comment)
+creates a food web from predator/prey relationships
 }
 

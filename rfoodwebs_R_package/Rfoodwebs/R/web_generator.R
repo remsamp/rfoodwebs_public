@@ -1,4 +1,4 @@
-#' calculates the mean of a vector while excluding all NAs from it (roxygen comment)
+#' creates a food web from predator/prey relationships
 #' @param spe_list is a string vector containing a list of species
 #' @param f_web is a data frame containing predator/prey relationships
 
