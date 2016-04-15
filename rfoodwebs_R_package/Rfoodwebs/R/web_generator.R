@@ -1,33 +1,31 @@
-#' creates a food web from predator/prey relationships
+#' Creates a predator/prey table
+#'
+#' Creates a table in which each row contains a predator and one
+#' of its prey. Each predator has as many entries as it has different prey.
 #' @param spe_list is a string vector containing a list of species
 #' @param f_web is a data frame containing predator/prey relationships
 
-web_generator <- function(spe_list, f_web){
-
-# Define lists of predators and prey that are used to provide the existence of predator-prey interactions
-  pred <- paste(f_web$Species.predator)
-  prey <- paste(f_web$Prey.species.all)
-
-# Initialise 'a', 'ind', 'predation.list' so that they can be used in the for loops below.  
-  a <- 1
-  ind <- 1:length(pred)
-  predation_list <- matrix(0,1,2)
-for(i in 1:length(spe_list)){
-      for(j in 1:length(spe_list)){
-          if(length(ind[pred == spe_list[i] & prey == spe_list[j]]) == 1){
-              predation_list[a,1] <- spe_list[i]
-              predation_list[a,2] <- spe_list[j]
-              pred_list <- matrix(0,a+1,2)
-              pred_list[1:a,] <- predation_list
-              predation_list <- pred_list
-              a <- a+1
-              } # end of if
-                if(i == length(spe_list) & j == length(spe_list)){
-                    predation_list <- predation_list[1:a-1,]
-                } # end of if
-             
-      } # end of for j
-          
-} # end of for i
-return(predation_list)
+web_generator_r <- function(spe_list, f_web){
+  # convert predator and prey columns in f_web from factor to character
+  f_web$Species.predator <- as.character(f_web$Species.predator)
+  f_web$Prey.species.all <- as.character(f_web$Prey.species.all)
+  
+  # subset the f_web database to only contain the species we are interested in
+  idx <- match(f_web$Species.predator, spe_list)
+  idx <- !is.na(idx)
+  idx1 <- match(f_web$Prey.species.all, spe_list)
+  idx1 <- !is.na(idx1)
+  subf_web <- f_web[idx & idx1 , ]
+  
+  # find what prey each of the predator eats
+  myres <- table(subf_web$Species.predator, subf_web$Prey.species.all)
+  myres[myres > 0] <- 1
+  
+  # format the output: this is where the problem is
+  mypred <- rownames(myres)
+  myprey <- colnames(myres)
+  mypred <- unlist(sapply(c(1:nrow(myres)), function(i)rep(mypred[i], each = sum(myres[i, ]))))
+  myprey <- unlist(sapply(c(1:nrow(myres)), function(i) myprey[myres[i, ]>0] ))
+  
+  return(data.frame(Predator = mypred, Prey = myprey))
 } 
