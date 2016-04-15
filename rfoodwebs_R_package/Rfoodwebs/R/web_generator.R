@@ -5,7 +5,7 @@
 #' @param spe_list is a string vector containing a list of species
 #' @param f_web is a data frame containing predator/prey relationships
 
-web_generator_r <- function(spe_list, f_web){
+web_generator <- function(spe_list, f_web){
   # convert predator and prey columns in f_web from factor to character
   f_web$Species.predator <- as.character(f_web$Species.predator)
   f_web$Prey.species.all <- as.character(f_web$Prey.species.all)
