@@ -1,4 +1,4 @@
-#' Remi's version of web_generator
+#' Creates a predator/prey table 
 #'
 #' Like web_generator it creates a table of predator and corresponding prey. 
 #' It it faster but it gives a different result and may not make any sense! To discuss with the group
@@ -6,7 +6,6 @@
 #' @param f_web is a data frame containing predator/prey relationships
 
 web_generator_r <- function(spe_list, f_web){
-
   # convert predator and prey columns in f_web from factor to character
   f_web$Species.predator <- as.character(f_web$Species.predator)
   f_web$Prey.species.all <- as.character(f_web$Prey.species.all)
@@ -22,11 +21,11 @@ web_generator_r <- function(spe_list, f_web){
   myres <- table(subf_web$Species.predator, subf_web$Prey.species.all)
   myres[myres > 0] <- 1
   
-  # format the output
+  # format the output: this is where the problem is
   mypred <- rownames(myres)
   myprey <- colnames(myres)
   mypred <- unlist(sapply(c(1:nrow(myres)), function(i)rep(mypred[i], each = sum(myres[i, ]))))
   myprey <- unlist(sapply(c(1:nrow(myres)), function(i) myprey[myres[i, ]>0] ))
 
- return(data.frame(mypred, myprey))
+  return(data.frame(Predator = mypred, Prey = myprey))
 } 
