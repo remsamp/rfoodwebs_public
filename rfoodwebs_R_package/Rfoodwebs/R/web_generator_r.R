@@ -1,11 +1,3 @@
-#' Creates a predator/prey table 
-#'
-#' @param spe_list is a string vector containing a list of species
-#' @param f_web is a data frame containing predator/prey relationships
-#' 
-#' @return The function returns a table where each row contains the name of a predator
-#' and the name of one of its prey. 
-
 web_generator_r <- function(spe_list, f_web){
   # convert predator and prey columns in f_web from factor to character
   f_web$Species.predator <- as.character(f_web$Species.predator)
