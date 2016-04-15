@@ -1,3 +1,10 @@
+#' Create a predator/prey table
+#'
+#' Like web_generator it creates a table of predator and corresponding prey. 
+#' It it faster but it gives a different result and may not make any sense! To discuss with the group
+#' @param spe_list is a string vector containing a list of species
+#' @param f_web is a data frame containing predator/prey relationships
+
 web_generator_r <- function(spe_list, f_web){
   # convert predator and prey columns in f_web from factor to character
   f_web$Species.predator <- as.character(f_web$Species.predator)

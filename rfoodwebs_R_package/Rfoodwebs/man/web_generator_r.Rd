@@ -2,7 +2,7 @@
 % Please edit documentation in R/web_generator_r.R
 \name{web_generator_r}
 \alias{web_generator_r}
-\title{Remi's version of web_generator}
+\title{Create a predator/prey table}
 \usage{
 web_generator_r(spe_list, f_web)
 }
