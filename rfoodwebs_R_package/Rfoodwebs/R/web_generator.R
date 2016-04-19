@@ -11,9 +11,9 @@ web_generator <- function(spe_list, f_web){
   f_web$Prey.species.all <- as.character(f_web$Prey.species.all)
   
   # subset the f_web database to only contain the species we are interested in
-  idx <- match(f_web$Species.predator, spe_list)
+  idx <- match(f_web$Species.predator, spe_list[, 1])
   idx <- !is.na(idx)
-  idx1 <- match(f_web$Prey.species.all, spe_list)
+  idx1 <- match(f_web$Prey.species.all, spe_list[, 1])
   idx1 <- !is.na(idx1)
   subf_web <- f_web[idx & idx1 , ]
   
