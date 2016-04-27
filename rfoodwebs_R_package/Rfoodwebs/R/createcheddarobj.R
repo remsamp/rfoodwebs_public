@@ -31,10 +31,10 @@ createcheddarobj <- function(Scale){
    subset_fctgroup <- fctgroup[subind,]
       cheddar_obj <- data.frame(
                                 node = sp,
-                                N = paste("Abundance.", S, sep = ""),
+                                N = Abundance,
                                 category = subset_fctgroup$category,
                                 functional_group = subset_fctgroup$functional.group,
-                                M = paste("Body.Mass.", S, sep = ""))
+                                M = Body.Mass)
       # Now need to save the current cheddar object for the appropriate spatial scale
         # eval(parse(text = paste("cheddar_obj.", S, "<- cheddar_obj", sep = "")))
         cheddar_obj
